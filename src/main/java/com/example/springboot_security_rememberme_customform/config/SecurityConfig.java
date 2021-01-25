@@ -1,6 +1,5 @@
 package com.example.springboot_security_rememberme_customform.config;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,15 +23,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //DISABLE CSRF
     httpSecurity.csrf().disable();
 
-    //SECURE EVERYTHING
-    httpSecurity.authorizeRequests().anyRequest().authenticated();
+    //SPECIFY ACCESS TO ENDPOINTS
+    httpSecurity.authorizeRequests()
+      .antMatchers("/SayHello").hasRole("USER");
 
     //CUSTOM LOGIN FORM
     httpSecurity.formLogin()
       .loginPage("/MyLogin")
       .loginProcessingUrl("/login");
 
-
   }
 
 }
+
+
+
